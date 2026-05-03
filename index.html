@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gentle-AI + Claude Code — Windows 11 Nativo</title>
+<title data-title-es="Gentle-AI + Claude Code — Windows 11 Nativo" data-title-en="Gentle-AI + Claude Code — Native Windows 11">Gentle-AI + Claude Code — Windows 11 Nativo</title>
+<link rel="icon" type="image/svg+xml" href="LogoDark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -88,8 +89,8 @@
   .step{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin:16px 0;}
   .stag{font-family:'JetBrains Mono',monospace;font-size:.67em;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
   .dot{width:7px;height:7px;border-radius:50%;}
-  .dps{background:var(--win);}   /* powershell */
-  .dgb{background:var(--orange);} /* git bash */
+  .dps{background:var(--win);}
+  .dgb{background:var(--orange);}
   .dac{background:var(--acc);}
   .dgn{background:var(--green);}
   .dpp{background:var(--acc2);}
@@ -158,9 +159,52 @@
     .card,.cmp-h,.cmp-b{padding:28px 22px;}
     .wrap{padding:0 18px;}
   }
+
+  /* Language switcher */
+  .lang-switch {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 1000;
+    display: flex;
+    gap: 0;
+    background: var(--bg-card, #12121a);
+    border: 1px solid var(--border, #2a2a3d);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 0.82em;
+    font-weight: 600;
+  }
+  .lang-switch button {
+    background: transparent;
+    border: none;
+    color: var(--text-dim, #8888a0);
+    padding: 8px 14px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: inherit;
+    transition: all 0.2s;
+  }
+  .lang-switch button:hover { color: var(--text-bright, #f0f0ff); }
+  .lang-switch button.active { background: var(--accent-blue, #6ea8fe); color: #0a0a0f; }
+
+  .lang-section[data-lang="en"] { display: none; }
+  html[lang="en"] .lang-section[data-lang="es"] { display: none; }
+  html[lang="en"] .lang-section[data-lang="en"] { display: block; }
+  html[lang="es"] .lang-section[data-lang="en"] { display: none; }
 </style>
 </head>
 <body>
+<!-- Language Switcher -->
+<div class="lang-switch">
+  <button id="btn-es" class="active" onclick="setLang('es')">ES</button>
+  <button id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- ESPAÑOL -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="lang-section" data-lang="es">
 
 <!-- HERO -->
 <section class="hero">
@@ -169,7 +213,7 @@
   <h1><span class="grad">Gentle-AI</span> + <span class="win-col">Claude Code</span></h1>
   <p class="desc">Instalación 100% nativa en Windows 11. Sin WSL2, sin Linux, sin configuraciones complejas. Solo Git for Windows y dos comandos.</p>
   <div class="badges">
-    <div class="badge b3">⊞ Windows 11 Nativo</div>
+    <div class="badge b3">&#8862; Windows 11 Nativo</div>
     <div class="badge b1">Claude Code</div>
     <div class="badge b2">gentle-ai v1.7+</div>
     <div class="badge b4">Sin Node.js · Sin WSL2</div>
@@ -185,8 +229,8 @@
 
 <!-- COMUNIDAD -->
 <div style="background: linear-gradient(90deg, rgba(108,140,255,.08), rgba(167,139,250,.08)); border-top: 1px solid var(--bord2); border-bottom: 1px solid var(--border); padding: 18px 40px; text-align: center;">
-  <p style="font-size: .82em; color: var(--mut2); font-family: 'JetBrains Mono', monospace; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">🙌 Guía gratuita y open-source para la comunidad</p>
-  <p style="font-size: .95em; color: var(--text); max-width: 700px; margin: 0 auto;">Esta guía fue creada para ayudar a desarrolladores hispanohablantes a potenciar su workflow con IA. Si te sirvió, compartila en tus redes o dejá una ⭐ en el <a href="https://github.com/p5Patricio/guia-gentle-ai-claude-code-win11" style="color: var(--acc); text-decoration: underline;">repo de GitHub</a>.</p>
+  <p style="font-size: .82em; color: var(--mut2); font-family: 'JetBrains Mono', monospace; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">&#128588; Open-source</p>
+  <p style="font-size: .95em; color: var(--text); max-width: 700px; margin: 0 auto;">Si te sirvió, dejá una &#11088; en el <a href="https://github.com/p5Patricio/guia-gentle-ai-claude-code-win11" style="color: var(--acc); text-decoration: underline;">repo de GitHub</a>.</p>
 </div>
 
 <!-- WHAT IS -->
@@ -194,12 +238,12 @@
   <div class="card ca">
     <div class="lbl">// Claude Code</div>
     <h2>Agente de coding de Anthropic</h2>
-    <p>Corre directo en tu terminal (PowerShell, CMD o Git Bash). Lee tu codebase, edita archivos, corre comandos y entiende el proyecto completo a través de lenguaje natural. <strong>Nativo en Windows desde 2025</strong> — solo necesita Git for Windows internamente.</p>
+    <p>Corre en PowerShell, CMD o Git Bash. Lee tu codebase, edita archivos y entiende el proyecto por lenguaje natural. <strong>Nativo en Windows desde 2025</strong> — solo necesita Git for Windows.</p>
   </div>
   <div class="card cb">
     <div class="lbl">// Gentle-AI</div>
     <h2>Configurador del ecosistema Gentleman</h2>
-    <p>No instala Claude Code — lo superpotencia. Un binario de Go que inyecta memoria persistente (Engram), workflow SDD de 9 fases, 21 skills de código moderno, docs en tiempo real (Context7), code review automático (GGA) y persona mentora. <strong>Binario nativo para Windows</strong> con installer PowerShell oficial.</p>
+    <p>Superpotencia Claude Code: memoria Engram, workflow SDD de 9 fases, 21 skills, Context7, GGA y persona mentora. <strong>Binario nativo de Go</strong> con installer PowerShell oficial.</p>
   </div>
 </div>
 
@@ -216,10 +260,6 @@
     ├── <span class="a4">Context7</span>   MCP server · docs de librerías en tiempo real
     ├── <span class="a5">Skills</span>     21 patrones · React 19, Next.js 15, TypeScript, Tailwind 4
     └── <span class="a1">GGA</span>        Guardian Angel · code review automático en cada commit
-
-<span style="color:var(--border2)">──────────────────────────────────────────────────────</span>
-<span style="color:var(--muted)">Requisitos: Git for Windows (Claude Code) · Go 1.24+ (gentle-ai)</span>
-<span style="color:var(--muted)">Sin Node.js · Sin WSL2 · Sin Docker · Sin dependencias extra</span>
     </div>
   </div>
 
@@ -233,50 +273,30 @@
         <div class="ph-s">Git for Windows + Go 1.24 · No necesitas nada más</div>
       </div>
     </div>
-
     <div class="alert awn">
-      <div>⊞</div>
+      <div>&#8862;</div>
       <div class="ab">
         <div class="t">Requisitos reales para Windows 11</div>
-        <p><strong>Claude Code</strong>: solo Git for Windows (usa Git Bash internamente). No requiere Node.js, no requiere WSL2.</p>
-        <p><strong>Gentle-AI</strong>: binario de Go autocontenido. No requiere Node.js, no requiere Python, no requiere Docker.</p>
-        <p><strong>Go 1.24+</strong>: solo si usas <code>go install</code> para instalar gentle-ai. Con el installer PowerShell oficial no lo necesitas.</p>
+        <p>Claude Code solo necesita Git for Windows. Gentle-AI es binario autocontenido; Go solo si usás <code>go install</code>.</p>
       </div>
     </div>
-
-    <h3>Paso 1 — Git for Windows (prerequisito de Claude Code)</h3>
+    <h3>Paso 1 — Git for Windows</h3>
     <div class="step">
       <div class="stag"><div class="dot dps"></div>PowerShell 7 — como Administrador</div>
-      <pre><span class="c"># Opción A — winget (recomendado)</span>
-<span class="k">winget</span> install --id Git.Git -e --source winget
-
-<span class="c"># Opción B — Descargar instalador gráfico desde git-scm.com</span>
-<span class="c"># Durante la instalación: marcar "Add Git to PATH" (ya viene marcado por defecto)</span>
-
-<span class="c"># Verificar instalación (cerrar y reabrir PowerShell primero)</span>
-<span class="k">git</span> --version     <span class="c"># → git version 2.x.x.windows.x</span>
-<span class="k">git</span> --exec-path   <span class="c"># debe mostrar ruta de Git Bash</span></pre>
+      <pre><span class="k">winget</span> install --id Git.Git -e --source winget
+<span class="k">git</span> --version</pre>
     </div>
-
-    <h3>Paso 2 — Go 1.24 (solo si usas go install para gentle-ai)</h3>
+    <h3>Paso 2 — Go 1.24 (solo para go install)</h3>
     <div class="step">
-      <div class="stag"><div class="dot dps"></div>PowerShell 7 — opcional, solo si prefieres go install</div>
-      <pre><span class="c"># Instalar Go via winget</span>
-<span class="k">winget</span> install --id GoLang.Go -e
-
-<span class="c"># Cerrar y reabrir PowerShell, luego verificar</span>
-<span class="k">go</span> version   <span class="c"># → go version go1.24.x windows/amd64</span>
-
-<span class="c"># Agregar el bin de Go al PATH (si no lo hace automáticamente)</span>
-<span class="c"># Panel de Control → Variables de Entorno → PATH → agregar:</span>
-<span class="c"># C:\Users\TuUsuario\go\bin</span></pre>
+      <div class="stag"><div class="dot dps"></div>PowerShell 7 — opcional</div>
+      <pre><span class="k">winget</span> install --id GoLang.Go -e
+<span class="k">go</span> version</pre>
     </div>
-
     <div class="alert ao">
-      <div>✅</div>
+      <div>&#9989;</div>
       <div class="ab">
-        <div class="t">Si usas el installer PowerShell de gentle-ai — no necesitas Go</div>
-        <p>El script <code>install.ps1</code> descarga directamente el binario compilado desde GitHub Releases. Ni Go ni Node.js requeridos. Es la opción más simple para Windows.</p>
+        <div class="t">El installer PowerShell de gentle-ai no requiere Go</div>
+        <p>Descarga el binario compilado directamente desde GitHub Releases.</p>
       </div>
     </div>
   </div>
@@ -291,104 +311,37 @@
         <div class="ph-s">Installer oficial de Anthropic — nativo, sin dependencias, auto-actualizable</div>
       </div>
     </div>
-
     <h3>Instalación oficial (recomendada)</h3>
     <div class="step">
-      <div class="stag"><div class="dot dps"></div>PowerShell 7 — NO necesitas ejecutar como Administrador</div>
-      <pre><span class="c"># Installer oficial de Anthropic — descarga y configura el PATH automáticamente</span>
-<span class="k">irm</span> https://claude.ai/install.ps1 | <span class="k">iex</span>
-
-<span class="c"># Cerrar y reabrir PowerShell (necesario para que el PATH tome efecto)</span>
-
-<span class="c"># Verificar instalación</span>
-<span class="k">claude</span> --version
-
-<span class="c"># Diagnosticar si algo falla</span>
-<span class="k">claude</span> doctor</pre>
+      <div class="stag"><div class="dot dps"></div>PowerShell 7 — NO necesitas Administrador</div>
+      <pre><span class="k">irm</span> https://claude.ai/install.ps1 | <span class="k">iex</span>
+<span class="k">claude</span> --version</pre>
     </div>
-
-    <h3>Instalación alternativa via winget</h3>
-    <div class="step">
-      <div class="stag"><div class="dot dps"></div>PowerShell 7</div>
-      <pre><span class="c"># Instalar via Windows Package Manager</span>
-<span class="k">winget</span> install --id Anthropic.ClaudeCode -e
-
-<span class="c"># NOTA: winget NO auto-actualiza — tienes que correr esto manualmente:</span>
-<span class="k">winget</span> upgrade Anthropic.ClaudeCode</pre>
-    </div>
-
     <div class="alert ai">
-      <div>ℹ️</div>
+      <div>&#8505;&#65039;</div>
       <div class="ab">
-        <div class="t">El installer nativo vs npm — usa siempre el nativo</div>
-        <p>El método antiguo era <code>npm install -g @anthropic-ai/claude-code</code>. Ese método está <strong>oficialmente deprecado</strong>. El installer nativo (<code>irm ... | iex</code>) es más rápido, no requiere Node.js y se auto-actualiza en background.</p>
+        <div class="t">Usa siempre el installer nativo</div>
+        <p>El método npm está deprecado. Alternativa: <code>winget</code> (no auto-actualiza).</p>
       </div>
     </div>
-
-    <h3>Dónde instala Claude Code en Windows</h3>
-    <div class="step">
-      <pre><span class="c"># El binario se instala en:</span>
-C:\Users\TuUsuario\.local\bin\claude.exe
-
-<span class="c"># La configuración queda en:</span>
-C:\Users\TuUsuario\.claude\
-
-<span class="c"># Si claude no se reconoce: agregar el bin al PATH manualmente</span>
-<span class="k">[Environment]</span>::SetEnvironmentVariable(
-    <span class="s">"PATH"</span>,
-    <span class="s">"$env:PATH;$env:USERPROFILE\.local\bin"</span>,
-    <span class="s">"User"</span>
-)</pre>
-    </div>
-
     <h3>Autenticación con tu cuenta Anthropic</h3>
     <div class="step">
-      <div class="stag"><div class="dot dps"></div>PowerShell / CMD / Git Bash — cualquiera funciona</div>
-      <pre><span class="c"># Iniciar Claude Code — abre el browser para autenticarse via OAuth</span>
+      <div class="stag"><div class="dot dps"></div>PowerShell / CMD / Git Bash</div>
+      <pre><span class="c"># Inicia sesión interactiva — abre el browser vía OAuth</span>
 <span class="k">claude</span>
 
-<span class="c"># El browser de Windows abre console.anthropic.com automáticamente</span>
-<span class="c"># Inicia sesión con tu cuenta → autoriza → vuelve al terminal</span>
-<span class="c"># La sesión se guarda en: C:\Users\TuUsuario\.claude\session.json</span>
-<span class="c"># No necesitas re-autenticarte en cada sesión</span>
-
-<span class="c"># Alternativa — autenticación via API key (para CI/CD o uso headless):</span>
+<span class="c"># Alternativa: API key para headless/CI</span>
 <span class="k">$env</span>:ANTHROPIC_API_KEY = <span class="s">"sk-ant-TU-KEY-AQUI"</span>
 <span class="k">claude</span></pre>
     </div>
-
     <div class="alert aw">
-      <div>💳</div>
+      <div>&#128179;</div>
       <div class="ab">
         <div class="t">Claude Code requiere cuenta de pago</div>
-        <p>Necesitas una suscripción <strong>Claude Pro</strong> ($20/mes), <strong>Claude Max</strong>, <strong>Teams</strong>, <strong>Enterprise</strong> o una cuenta en <strong>console.anthropic.com</strong> con billing habilitado. El plan gratuito de claude.ai no incluye Claude Code.</p>
+        <p>Necesitas Claude Pro/Max/Teams o billing en console.anthropic.com.</p>
       </div>
     </div>
-
-    <h3>Comandos esenciales de Claude Code</h3>
-    <table>
-      <tr><th>Comando</th><th>Descripción</th></tr>
-      <tr><td><code>claude</code></td><td>Inicia sesión interactiva en el directorio actual</td></tr>
-      <tr><td><code>claude "pregunta"</code></td><td>Modo non-interactivo — responde y sale</td></tr>
-      <tr><td><code>claude --continue</code></td><td>Retoma la última sesión</td></tr>
-      <tr><td><code>claude doctor</code></td><td>Diagnóstico: versión, PATH, configuración</td></tr>
-      <tr><td><code>claude /cost</code></td><td>Ver costo acumulado de la sesión</td></tr>
-      <tr><td><code>claude /clear</code></td><td>Limpiar el contexto de la conversación</td></tr>
-      <tr><td><code>claude /help</code></td><td>Ver todos los comandos disponibles</td></tr>
-      <tr><td><code>claude update</code></td><td>Forzar actualización inmediata (normalmente es automática)</td></tr>
-    </table>
-
-    <h3>Terminales compatibles en Windows</h3>
-    <div class="alert ao">
-      <div>✅</div>
-      <div class="ab">
-        <div class="t">Claude Code funciona en los tres terminales de Windows</div>
-        <p><strong>PowerShell 7</strong> — recomendado para el día a día en Windows.</p>
-        <p><strong>CMD (Command Prompt)</strong> — funciona, menos features.</p>
-        <p><strong>Git Bash</strong> — funciona, sintaxis más cercana a Linux. Claude Code lo usa internamente.</p>
-        <p>Todos abren correctamente desde <strong>Windows Terminal</strong> (recomendado instalar desde la Microsoft Store).</p>
-      </div>
-    </div>
+    <p style="color:var(--mut2);margin:14px 0;">Claude Code funciona en PowerShell 7 (recomendado), CMD y Git Bash. Usá <code>claude /help</code> para ver todos los comandos.</p>
   </div>
 
   <!-- ═══ FASE 2 — GENTLE-AI ═══ -->
@@ -401,33 +354,22 @@ C:\Users\TuUsuario\.claude\
         <div class="ph-s">Binario nativo de Go · Installer PowerShell oficial · Sin dependencias</div>
       </div>
     </div>
-
     <h3>Opción A — Installer PowerShell (recomendada, sin Go)</h3>
     <div class="step">
       <div class="stag"><div class="dot dps"></div>PowerShell 7</div>
-      <pre><span class="c"># Descarga el binario compilado directamente desde GitHub Releases</span>
-<span class="k">irm</span> https://raw.githubusercontent.com/Gentleman-Programming/gentle-ai/main/scripts/install.ps1 | <span class="k">iex</span>
-
-<span class="c"># Verificar</span>
-<span class="k">gentle-ai</span> --version</pre>
+      <pre><span class="k">irm</span> https://raw.githubusercontent.com/Gentleman-Programming/gentle-ai/main/scripts/install.ps1 | <span class="k">iex</span></pre>
     </div>
-
     <h3>Opción B — Go install (si ya tienes Go 1.24+)</h3>
     <div class="step">
       <div class="stag"><div class="dot dps"></div>PowerShell 7</div>
-      <pre><span class="c"># Compilar e instalar desde el código fuente (siempre te da el latest)</span>
-<span class="k">go</span> install github.com/gentleman-programming/gentle-ai/cmd/gentle-ai@latest
-
-<span class="c"># El binario queda en: C:\Users\TuUsuario\go\bin\gentle-ai.exe</span>
-<span class="c"># Verificar</span>
+      <pre><span class="k">go</span> install github.com/gentleman-programming/gentle-ai/cmd/gentle-ai@latest
 <span class="k">gentle-ai</span> --version</pre>
     </div>
-
     <div class="alert ao">
-      <div>✅</div>
+      <div>&#9989;</div>
       <div class="ab">
         <div class="t">gentle-ai es un binario estático — cero dependencias en runtime</div>
-        <p>Una vez instalado, el binario funciona solo. Sin Node.js, sin Python, sin Docker, sin ningún runtime adicional. Solo el ejecutable <code>gentle-ai.exe</code>.</p>
+        <p>Solo el ejecutable <code>gentle-ai.exe</code>. Sin Node.js, Python ni Docker.</p>
       </div>
     </div>
   </div>
@@ -442,278 +384,110 @@ C:\Users\TuUsuario\.claude\
         <div class="ph-s">Inyectar Engram + SDD + Skills + Context7 + GGA + Persona en Claude Code</div>
       </div>
     </div>
-
-    <h3>Opción A — TUI interactiva (recomendada para la primera vez)</h3>
+    <h3>Opción A — TUI interactiva (recomendada)</h3>
     <div class="step">
       <div class="stag"><div class="dot dps"></div>PowerShell 7</div>
-      <pre><span class="c"># Lanzar la TUI guiada con tema Rose Pine</span>
-<span class="k">gentle-ai</span>
-
-<span class="c"># Navegar con flechas, seleccionar con Espacio, confirmar con Enter</span>
-<span class="c"># Puedes elegir qué componentes instalar de forma visual</span></pre>
+      <pre><span class="k">gentle-ai</span></pre>
     </div>
-
-    <h3>Opción B — CLI directo (todo el ecosistema en un comando)</h3>
+    <h3>Opción B — CLI directo (todo en un comando)</h3>
     <div class="step">
       <div class="stag"><div class="dot dps"></div>PowerShell 7</div>
-      <pre><span class="c"># RECOMENDADO: primero ver qué haría sin aplicar nada</span>
-<span class="k">gentle-ai</span> install --dry-run `
-  --agent claude-code `
-  --preset full-gentleman
-
-<span class="c"># Si el plan se ve bien, ejecutar sin --dry-run:</span>
-<span class="k">gentle-ai</span> install `
-  --agent claude-code `
-  --preset full-gentleman
-
-<span class="c"># Nota: en PowerShell el backtick ` es el caracter de continuación de línea</span>
-<span class="c"># (equivalente al \ en bash)</span></pre>
+      <pre><span class="k">gentle-ai</span> install --agent claude-code --preset full-gentleman</pre>
     </div>
-
-    <h3>Instalación por componentes individuales</h3>
+    <h3>Instalación por componentes</h3>
     <div class="step">
       <div class="stag"><div class="dot dps"></div>PowerShell 7</div>
-      <pre><span class="c"># Solo los componentes que quieres (sin GGA ni persona si prefieres)</span>
-<span class="k">gentle-ai</span> install `
-  --agent claude-code `
-  --component engram,sdd,skills,context7,permissions `
-  --persona gentleman
-
-<span class="c"># Agregar skills específicos después</span>
-<span class="k">gentle-ai</span> install `
-  --agent claude-code `
-  --component skills `
-  --skill react-19,typescript,go-testing</pre>
+      <pre><span class="k">gentle-ai</span> install --agent claude-code --component engram,sdd,skills,context7,permissions --persona gentleman</pre>
     </div>
-
     <h3>Referencia de componentes</h3>
     <div class="flow">
-      <div class="fc"><div class="fc-n">01</div><div class="fc-t">engram</div><div class="fc-d">Memoria persistente con SQLite. Guarda contexto, decisiones y arquitectura del proyecto.</div></div>
-      <div class="fc"><div class="fc-n">02</div><div class="fc-t">sdd</div><div class="fc-d">Spec-Driven Dev. 9 fases: explore→propose→spec→design→tasks→apply→verify→review→archive.</div></div>
-      <div class="fc"><div class="fc-n">03</div><div class="fc-t">skills</div><div class="fc-d">21 patrones de código moderno: React 19, Next.js 15, TypeScript strict, Tailwind 4, Go.</div></div>
-      <div class="fc"><div class="fc-n">04</div><div class="fc-t">context7</div><div class="fc-d">MCP server. Consulta docs de librerías en tiempo real antes de responder.</div></div>
-      <div class="fc"><div class="fc-n">05</div><div class="fc-t">gga</div><div class="fc-d">Guardian Angel. Code review automático con IA en cada git commit.</div></div>
-      <div class="fc"><div class="fc-n">06</div><div class="fc-t">persona</div><div class="fc-d">Mentor Gentleman. Explica el porqué, objeta malas prácticas, enseña en lugar de ejecutar.</div></div>
+      <div class="fc"><div class="fc-n">01</div><div class="fc-t">engram</div><div class="fc-d">Memoria persistente con SQLite.</div></div>
+      <div class="fc"><div class="fc-n">02</div><div class="fc-t">sdd</div><div class="fc-d">Spec-Driven Dev · 9 fases.</div></div>
+      <div class="fc"><div class="fc-n">03</div><div class="fc-t">skills</div><div class="fc-d">21 patrones de código moderno.</div></div>
+      <div class="fc"><div class="fc-n">04</div><div class="fc-t">context7</div><div class="fc-d">MCP server · docs en tiempo real.</div></div>
+      <div class="fc"><div class="fc-n">05</div><div class="fc-t">gga</div><div class="fc-d">Code review automático.</div></div>
+      <div class="fc"><div class="fc-n">06</div><div class="fc-t">persona</div><div class="fc-d">Mentor que enseña y objeta.</div></div>
     </div>
-
-    <h3>Flags disponibles</h3>
-    <table>
-      <tr><th>Flag</th><th>Valores posibles</th><th>Descripción</th></tr>
-      <tr><td><code>--agent</code></td><td><code>claude-code</code>, <code>opencode</code></td><td>Agente a configurar (comma-separated)</td></tr>
-      <tr><td><code>--preset</code></td><td><code>full-gentleman</code>, <code>ecosystem-only</code>, <code>minimal</code>, <code>custom</code></td><td>Preset predefinido</td></tr>
-      <tr><td><code>--component</code></td><td><code>engram</code>, <code>sdd</code>, <code>skills</code>, <code>context7</code>, <code>persona</code>, <code>permissions</code>, <code>gga</code></td><td>Componentes (comma-separated)</td></tr>
-      <tr><td><code>--skill</code></td><td>nombre del skill</td><td>Skills adicionales</td></tr>
-      <tr><td><code>--persona</code></td><td><code>gentleman</code>, <code>neutral</code>, <code>custom</code></td><td>Personalidad del agente</td></tr>
-      <tr><td><code>--dry-run</code></td><td>–</td><td>Preview sin aplicar cambios</td></tr>
-    </table>
+    <p style="color:var(--mut2);margin:14px 0;">Ver <code>gentle-ai --help</code> para todas las flags disponibles: <code>--agent</code>, <code>--preset</code>, <code>--component</code>, <code>--skill</code>, <code>--persona</code>, <code>--dry-run</code>.</p>
   </div>
 
-  <!-- ═══ FASE 4 — PROYECTO NUEVO ═══ -->
+  <!-- ═══ FASE 4 — PROYECTO NUEVO / EXISTENTE ═══ -->
   <div class="ph">
     <div class="div"></div><br><br>
     <div class="ph-hd">
       <div class="ph-num st">4</div>
       <div>
-        <div class="ph-t">Usar en un proyecto NUEVO</div>
-        <div class="ph-s">Desde cero en Windows 11 · Dónde guardar los proyectos · Cómo arrancar</div>
+        <div class="ph-t">Usar en un proyecto</div>
+        <div class="ph-s">Nuevo o ya iniciado · Dónde guardar los proyectos · Cómo arrancar</div>
       </div>
     </div>
-
     <div class="alert aw">
-      <div>📁</div>
+      <div>&#128193;</div>
       <div class="ab">
-        <div class="t">¿Dónde guardar los proyectos en Windows?</div>
-        <p>Guarda tus proyectos en <code>C:\Users\TuUsuario\proyectos\</code> o en <code>C:\dev\</code>. Evita paths con espacios o caracteres especiales. Claude Code funciona con paths de Windows normales desde PowerShell.</p>
+        <div class="t">¿Dónde guardar los proyectos?</div>
+        <p>Usá <code>C:\dev\</code> o <code>C:\Users\TuUsuario\proyectos\</code>.</p>
       </div>
     </div>
-
+    <h3>Proyecto nuevo</h3>
     <div class="ub">
-      <h3>Flujo completo — proyecto nuevo desde PowerShell</h3>
-      <pre><span class="c">═══════════════════════════════════════════════════
-  PROYECTO NUEVO — paso a paso en Windows 11
-═══════════════════════════════════════════════════</span>
-
-<span class="c"># 1. Crear el directorio y entrar</span>
-<span class="k">mkdir</span> C:\dev\mi-app
+      <pre><span class="k">mkdir</span> C:\dev\mi-app
 <span class="k">cd</span> C:\dev\mi-app
-
-<span class="c"># 2. Inicializar git (necesario para Engram y GGA)</span>
 <span class="k">git</span> init
 <span class="k">git</span> commit --allow-empty -m <span class="s">"chore: init"</span>
-
-<span class="c"># 3. (Opcional) Inicializar tu stack — ejemplo con Next.js 15</span>
-<span class="k">npx</span> create-next-app@latest . --typescript --tailwind --eslint
-
-<span class="c"># 4. Configurar el ecosistema Gentleman</span>
 <span class="k">gentle-ai</span> install --agent claude-code --preset full-gentleman
-
-<span class="c"># 5. Inicializar Engram en el proyecto</span>
 <span class="k">engram</span> init
-
-<span class="c"># 6. Iniciar Claude Code en el proyecto</span>
-<span class="k">claude</span>
-
-<span class="c"># 7. En el chat de Claude Code, escribir:</span>
-<span class="c"># "Inicializa el contexto SDD para este proyecto Next.js 15 con TypeScript"</span></pre>
+<span class="k">claude</span></pre>
     </div>
-
-    <h3>Primera sesión — qué decirle a Claude</h3>
-    <div class="step">
-      <div class="stag"><div class="dot dac"></div>Dentro del chat de Claude Code</div>
-      <pre><span class="c"># Mensaje de apertura recomendado:</span>
-<span class="s">"Eres mi par de programación Gentleman. Estoy iniciando
-un proyecto de [descripción]. Usemos SDD: primero
-explorá el stack y definí la arquitectura."</span>
-
-<span class="c"># Para activar SDD en un feature:</span>
-<span class="s">"Usemos SDD para implementar [feature]. Empezá por la fase explore."</span>
-
-<span class="c"># Para verificar que Context7 funciona:</span>
-<span class="s">"¿Cuáles son los cambios de API en React 19? Consultá Context7."</span>
-
-<span class="c"># Para guardar algo en Engram:</span>
-<span class="s">"Guardá en Engram: usamos Zod para validación de todos los inputs."</span></pre>
-    </div>
-  </div>
-
-  <!-- ═══ FASE 5 — PROYECTO EXISTENTE ═══ -->
-  <div class="ph">
-    <div class="div"></div><br><br>
-    <div class="ph-hd">
-      <div class="ph-num tl">5</div>
-      <div>
-        <div class="ph-t">Usar en un proyecto YA INICIADO</div>
-        <div class="ph-s">Inyectar el ecosistema sin romper configuraciones existentes</div>
-      </div>
-    </div>
-
+    <h3>Proyecto existente</h3>
     <div class="ub">
-      <h3>Flujo completo — proyecto existente en Windows</h3>
-      <pre><span class="c">═══════════════════════════════════════════════════
-  PROYECTO EXISTENTE — inyectar el ecosistema
-═══════════════════════════════════════════════════</span>
-
-<span class="c"># 1. Navegar al proyecto</span>
-<span class="k">cd</span> C:\dev\mi-proyecto-existente
-
-<span class="c"># 2. Verificar que tiene git (Engram lo requiere)</span>
+      <pre><span class="k">cd</span> C:\dev\mi-proyecto-existente
 <span class="k">git</span> status
-<span class="c"># Si no tiene: git init && git add . && git commit -m "chore: init"</span>
-
-<span class="c"># 3. Preview de lo que instalará (sin tocar nada)</span>
-<span class="k">gentle-ai</span> install --dry-run `
-  --agent claude-code `
-  --preset full-gentleman
-
-<span class="c"># 4. Aplicar si el plan está bien</span>
-<span class="k">gentle-ai</span> install `
-  --agent claude-code `
-  --preset full-gentleman
-
-<span class="c"># 5. Inicializar Engram en el proyecto existente</span>
+<span class="k">gentle-ai</span> install --agent claude-code --preset full-gentleman
 <span class="k">engram</span> init
-
-<span class="c"># 6. Iniciar Claude Code</span>
-<span class="k">claude</span>
-
-<span class="c"># 7. En el chat, pedir que explore el proyecto:</span>
-<span class="s">"Empezá por la fase explore de SDD: leé el codebase,
-detectá el stack y guardá el contexto en Engram."</span></pre>
+<span class="k">claude</span></pre>
     </div>
-
     <div class="alert ao">
-      <div>🛡️</div>
+      <div>&#128737;&#65039;</div>
       <div class="ab">
         <div class="t">gentle-ai no destruye tu configuración existente</div>
-        <p>Usa <em>marker-based file merging</em>: inyecta los bloques del ecosistema sin borrar tu configuración. Además hace un backup automático antes de cualquier cambio. Si algo sale mal: revisa <code>C:\Users\TuUsuario\.gentle-ai\backups\</code></p>
+        <p>Inyecta bloques sin borrar tu config. Backup en <code>~\.gentle-ai\backups\</code>.</p>
       </div>
     </div>
   </div>
 
-  <!-- ═══ FASE 6 — FLUJO DIARIO ═══ -->
+  <!-- ═══ FASE 5 — FLUJO DIARIO ═══ -->
   <div class="ph">
     <div class="div"></div><br><br>
     <div class="ph-hd">
-      <div class="ph-num" style="background:linear-gradient(135deg,#34d399,#0891b2);box-shadow:0 0 30px rgba(45,212,191,.25)">6</div>
+      <div class="ph-num" style="background:linear-gradient(135deg,#34d399,#0891b2);box-shadow:0 0 30px rgba(45,212,191,.25)">5</div>
       <div>
         <div class="ph-t">Flujo de trabajo diario en Windows 11</div>
         <div class="ph-s">Cómo arrancar y usar el stack todos los días</div>
       </div>
     </div>
-
-    <h3>Arranque diario — todo desde PowerShell</h3>
+    <h3>Arranque diario</h3>
     <div class="step">
       <div class="stag"><div class="dot dps"></div>PowerShell 7 — Windows Terminal recomendado</div>
-      <pre><span class="c"># 1. Abrir Windows Terminal con perfil PowerShell 7
-# 2. Navegar al proyecto</span>
-<span class="k">cd</span> C:\dev\mi-app
-
-<span class="c"># 3. (Opcional) Ver memorias del proyecto guardadas en Engram</span>
+      <pre><span class="k">cd</span> C:\dev\mi-app
 <span class="k">engram</span> list
-
-<span class="c"># 4. Iniciar Claude Code</span>
-<span class="k">claude</span>
-
-<span class="c"># 5. Pedir orientación al inicio de la sesión:</span>
-<span class="c">#    "¿Qué hicimos en la última sesión? Revisá Engram."</span></pre>
+<span class="k">claude</span></pre>
     </div>
-
-    <h3>Comandos de Engram más útiles</h3>
+    <h3>Comandos de Engram útiles</h3>
     <div class="step">
-      <div class="stag"><div class="dot dgn"></div>PowerShell 7 — fuera de Claude Code</div>
-      <pre><span class="c"># Ver todas las memorias del proyecto actual</span>
-<span class="k">engram</span> list
-
-<span class="c"># Buscar en las memorias (full-text search)</span>
-<span class="k">engram</span> search <span class="s">"arquitectura"</span>
-
-<span class="c"># Abrir TUI interactiva de Engram</span>
-<span class="k">engram</span> tui
-
-<span class="c"># Estado de Engram</span>
-<span class="k">engram</span> status
-
-<span class="c"># Sincronizar memorias entre máquinas (via git)</span>
-<span class="k">engram</span> sync
-<span class="k">engram</span> sync --import   <span class="c"># en otra máquina</span></pre>
+      <div class="stag"><div class="dot dgn"></div>PowerShell 7</div>
+      <pre><span class="k">engram</span> list
+<span class="k">engram</span> search <span class="s">"arquitectura"</span></pre>
     </div>
-
     <h3>Comandos en el chat de Claude Code</h3>
     <div class="step">
       <div class="stag"><div class="dot dac"></div>Dentro del chat de Claude Code</div>
-      <pre><span class="c"># Activar SDD para un feature nuevo</span>
-<span class="s">"Usemos SDD para implementar autenticación con NextAuth v5"</span>
-
-<span class="c"># Pedir que guarde algo en Engram</span>
-<span class="s">"Guardá en Engram: siempre usamos Server Components por defecto en Next.js"</span>
-
-<span class="c"># Consultar docs actualizadas via Context7</span>
-<span class="s">"¿Cómo funciona useActionState en React 19? Consultá Context7"</span>
-
-<span class="c"># Code review del último commit</span>
-<span class="s">"Hacé un code review del último commit con los estándares Gentleman"</span>
-
-<span class="c"># Continuar donde quedaron</span>
-<span class="s">"¿En qué fase del SDD estábamos? Revisá Engram y continuemos"</span></pre>
+      <pre><span class="s">"Usemos SDD para implementar [feature]. Empezá por explore."</span></pre>
     </div>
-
     <h3>Actualizar ambas herramientas</h3>
     <div class="step">
       <div class="stag"><div class="dot dps"></div>PowerShell 7</div>
-      <pre><span class="c"># Claude Code — se actualiza automáticamente en background</span>
-<span class="c"># Para forzar actualización inmediata:</span>
-<span class="k">claude</span> update
-
-<span class="c"># Si instalaste via winget, actualizar manualmente:</span>
-<span class="k">winget</span> upgrade Anthropic.ClaudeCode
-
-<span class="c"># gentle-ai — re-ejecutar el installer:</span>
+      <pre><span class="k">claude</span> update
 <span class="k">irm</span> https://raw.githubusercontent.com/Gentleman-Programming/gentle-ai/main/scripts/install.ps1 | <span class="k">iex</span>
-
-<span class="c"># Si usaste go install:</span>
-<span class="k">go</span> install github.com/gentleman-programming/gentle-ai/cmd/gentle-ai@latest
-
-<span class="c"># Re-aplicar la configuración actualizada a Claude Code:</span>
 <span class="k">gentle-ai</span> install --agent claude-code --preset full-gentleman</pre>
     </div>
   </div>
@@ -722,45 +496,23 @@ detectá el stack y guardá el contexto en Engram."</span></pre>
   <div class="ph">
     <div class="div"></div><br><br>
     <div class="ph-hd">
-      <div class="ph-num wn">≈</div>
+      <div class="ph-num wn">&#8776;</div>
       <div>
-        <div class="ph-t">Windows nativo vs WSL2 — ¿cuándo usar cada uno?</div>
+        <div class="ph-t">Windows nativo vs WSL2</div>
         <div class="ph-s">La única diferencia real que importa</div>
       </div>
     </div>
-
     <div class="cmp">
-      <div class="cmp-h wn">⊞ Windows Nativo (esta guía)</div>
-      <div class="cmp-h ws">🐧 WSL2 + Ubuntu</div>
-      <div class="cmp-b">
-        <p style="margin-bottom:10px;font-size:.9em;color:var(--mut2);">
-          <span class="chip cb2">✅</span>&nbsp; Setup simple · 2 pasos<br><br>
-          <span class="chip cb2">✅</span>&nbsp; Claude Code · funciona igual<br><br>
-          <span class="chip cb2">✅</span>&nbsp; Gentle-AI · funciona igual<br><br>
-          <span class="chip cb2">✅</span>&nbsp; Engram, SDD, Context7, GGA · todos funcionan<br><br>
-          <span class="chip cb2">✅</span>&nbsp; VS Code · integración directa sin extensiones<br><br>
-          <span class="chip cb3">❌</span>&nbsp; Bash sandbox de seguridad (solo WSL2)<br><br>
-          <span class="chip cb4">→</span>&nbsp; <strong style="color:var(--text)">Recomendado para uso personal y desarrollo</strong>
-        </p>
-      </div>
-      <div class="cmp-b">
-        <p style="margin-bottom:10px;font-size:.9em;color:var(--mut2);">
-          <span class="chip cb4">⚠</span>&nbsp; Setup más complejo · múltiples pasos<br><br>
-          <span class="chip cb2">✅</span>&nbsp; Claude Code · funciona igual<br><br>
-          <span class="chip cb2">✅</span>&nbsp; Gentle-AI · funciona igual<br><br>
-          <span class="chip cb2">✅</span>&nbsp; Engram, SDD, Context7, GGA · todos funcionan<br><br>
-          <span class="chip cb2">✅</span>&nbsp; NemoClaw completo (sandbox de seguridad NVIDIA)<br><br>
-          <span class="chip cb2">✅</span>&nbsp; Bash sandbox de seguridad de Claude Code<br><br>
-          <span class="chip cb4">→</span>&nbsp; <strong style="color:var(--text)">Solo necesario si usas NemoClaw o OpenClaw</strong>
-        </p>
-      </div>
+      <div class="cmp-h wn">&#8862; Windows Nativo</div>
+      <div class="cmp-h ws">&#128039; WSL2 + Ubuntu</div>
+      <div class="cmp-b"><p style="margin-bottom:10px;font-size:.9em;color:var(--mut2);">&#9989; Setup simple · 2 pasos<br>&#9989; Todo el ecosistema funciona<br>&#10060; Sin bash sandbox<br>&rarr; <strong style="color:var(--text)">Recomendado</strong></p></div>
+      <div class="cmp-b"><p style="margin-bottom:10px;font-size:.9em;color:var(--mut2);">&#9888; Setup más complejo<br>&#9989; Todo el ecosistema funciona<br>&#9989; NemoClaw + bash sandbox<br>&rarr; <strong style="color:var(--text)">Solo si usás NemoClaw/OpenClaw</strong></p></div>
     </div>
-
     <div class="alert ai">
-      <div>💡</div>
+      <div>&#128161;</div>
       <div class="ab">
-        <div class="t">Conclusión clara</div>
-        <p>Para Claude Code + gentle-ai en uso personal: <strong>Windows nativo es suficiente y mucho más simple</strong>. Las únicas razones para usar WSL2 son si ya lo tienes configurado, si quieres el bash sandbox de seguridad de Claude Code, o si usas OpenClaw/NemoClaw que sí requieren Linux.</p>
+        <div class="t">Conclusión</div>
+        <p>Windows nativo es suficiente y mucho más simple. Usá WSL2 solo si necesitás el bash sandbox o NemoClaw/OpenClaw.</p>
       </div>
     </div>
   </div>
@@ -769,65 +521,19 @@ detectá el stack y guardá el contexto en Engram."</span></pre>
   <div class="ph">
     <div class="div"></div><br><br>
     <div class="ph-hd">
-      <div class="ph-num" style="background:linear-gradient(135deg,#f87171,#dc2626);box-shadow:0 0 30px rgba(248,113,113,.2)">⚠</div>
+      <div class="ph-num" style="background:linear-gradient(135deg,#f87171,#dc2626);box-shadow:0 0 30px rgba(248,113,113,.2)">&#9888;</div>
       <div>
         <div class="ph-t">Troubleshooting en Windows 11</div>
         <div class="ph-s">Problemas comunes y sus soluciones</div>
       </div>
     </div>
-
     <table>
       <tr><th>Problema</th><th>Causa</th><th>Solución</th></tr>
-      <tr>
-        <td><strong><code>claude</code> no se reconoce como comando</strong></td>
-        <td><code>~\.local\bin</code> no está en el PATH</td>
-        <td>Cerrar y reabrir PowerShell. Si persiste:<br><code>[Environment]::SetEnvironmentVariable("PATH","$env:PATH;$env:USERPROFILE\.local\bin","User")</code></td>
-      </tr>
-      <tr>
-        <td><strong><code>gentle-ai</code> no se reconoce</strong></td>
-        <td>El binario no está en el PATH</td>
-        <td>Vía go install: agregar <code>C:\Users\TuUsuario\go\bin</code> al PATH. Vía installer ps1: cerrar y reabrir PowerShell.</td>
-      </tr>
-      <tr>
-        <td><strong>El browser no abre al autenticar</strong></td>
-        <td>Firewall o configuración de browser</td>
-        <td>Copiar la URL que aparece en el terminal y pegarla manualmente en el browser.</td>
-      </tr>
-      <tr>
-        <td><strong>Pegar imágenes con Ctrl+V no funciona</strong></td>
-        <td>Limitación conocida en Windows nativo</td>
-        <td>Usar <strong>Alt+V</strong> para pegar imágenes del clipboard. O guardar la imagen como archivo y arrastrarla al terminal.</td>
-      </tr>
-      <tr>
-        <td><strong>Engram no recuerda el proyecto</strong></td>
-        <td>El directorio no tiene git init</td>
-        <td><code>git init</code> → <code>git add .</code> → <code>git commit -m "init"</code> → <code>engram init</code></td>
-      </tr>
-      <tr>
-        <td><strong>Error de ejecución de scripts de PowerShell</strong></td>
-        <td>Política de ejecución restrictiva</td>
-        <td><code>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></td>
-      </tr>
-      <tr>
-        <td><strong>Claude Code pierde contexto en sesiones largas</strong></td>
-        <td>Context window lleno</td>
-        <td>Usar <code>/clear</code> y pedir: <em>"Revisá Engram y resumí dónde estamos"</em>. Engram garantiza continuidad.</td>
-      </tr>
-      <tr>
-        <td><strong>gentle-ai sobreescribe mi CLAUDE.md</strong></td>
-        <td>Conflicto de merge</td>
-        <td>Usar <code>--dry-run</code> primero. Restaurar desde <code>C:\Users\TuUsuario\.gentle-ai\backups\</code></td>
-      </tr>
-      <tr>
-        <td><strong>Context7 no responde</strong></td>
-        <td>MCP server no configurado</td>
-        <td><code>gentle-ai install --agent claude-code --component context7</code></td>
-      </tr>
-      <tr>
-        <td><strong>GGA no hace review al commitear</strong></td>
-        <td>Git hook no instalado</td>
-        <td><code>gentle-ai install --agent claude-code --component gga</code></td>
-      </tr>
+      <tr><td><strong><code>claude</code> no se reconoce</strong></td><td><code>~\.local\bin</code> no está en el PATH</td><td>Cerrar y reabrir PowerShell. Si persiste, agregar <code>$env:USERPROFILE\.local\bin</code> al PATH de usuario.</td></tr>
+      <tr><td><strong><code>gentle-ai</code> no se reconoce</strong></td><td>El binario no está en el PATH</td><td>Agregar <code>C:\Users\TuUsuario\go\bin</code> al PATH (go install) o cerrar y reabrir PowerShell (installer).</td></tr>
+      <tr><td><strong>Engram no recuerda el proyecto</strong></td><td>Sin git init</td><td><code>git init && git add . && git commit -m "init" && engram init</code></td></tr>
+      <tr><td><strong>Error de ejecución de scripts de PowerShell</strong></td><td>Política restrictiva</td><td><code>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></td></tr>
+      <tr><td><strong>Claude Code pierde contexto en sesiones largas</strong></td><td>Context window lleno</td><td><code>/clear</code> y pedir que revise Engram.</td></tr>
     </table>
   </div>
 
@@ -837,29 +543,426 @@ detectá el stack y guardá el contexto en Engram."</span></pre>
     <div style="font-family:'JetBrains Mono',monospace;font-size:.68em;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:22px;">// antes vs después</div>
     <table>
       <tr><th>Aspecto</th><th>Claude Code solo</th><th>+ Gentle-AI</th></tr>
-      <tr><td><strong>Memoria entre sesiones</strong></td><td><span class="chip cb3">❌ Ninguna</span></td><td><span class="chip cb2">✅ Engram persiste todo</span></td></tr>
-      <tr><td><strong>Proceso de desarrollo</strong></td><td><span class="chip cb4">Ad-hoc</span></td><td><span class="chip cb2">✅ SDD estructurado (9 fases)</span></td></tr>
-      <tr><td><strong>Documentación de libs</strong></td><td><span class="chip cb4">Fecha de corte del modelo</span></td><td><span class="chip cb2">✅ Tiempo real con Context7</span></td></tr>
-      <tr><td><strong>Code review</strong></td><td><span class="chip cb3">❌ Solo si lo pedís</span></td><td><span class="chip cb2">✅ Automático en cada commit</span></td></tr>
-      <tr><td><strong>Onboarding al proyecto</strong></td><td><span class="chip cb3">❌ Explicás todo de nuevo</span></td><td><span class="chip cb2">✅ Claude ya conoce el proyecto</span></td></tr>
-      <tr><td><strong>Persona del agente</strong></td><td><span class="chip cb4">Ejecutor sin criterio</span></td><td><span class="chip cb2">✅ Mentor que enseña y objeta</span></td></tr>
+      <tr><td><strong>Memoria entre sesiones</strong></td><td>Ninguna</td><td>Engram persiste todo</td></tr>
+      <tr><td><strong>Proceso de desarrollo</strong></td><td>Ad-hoc</td><td>SDD estructurado (9 fases)</td></tr>
+      <tr><td><strong>Documentación de libs</strong></td><td>Fecha de corte del modelo</td><td>Tiempo real con Context7</td></tr>
+      <tr><td><strong>Code review</strong></td><td>Solo si lo pedís</td><td>Automático en cada commit</td></tr>
     </table>
   </div>
 
 </div><!-- /wrap -->
 
 <footer>
-  <div class="ft-big">Gentle-AI × Claude Code</div>
+  <div class="ft-big">Gentle-AI &times; Claude Code</div>
   <p>Windows 11 nativo · Sin WSL2 · Sin Node.js · Sin dependencias</p>
   <br>
   <p style="color:var(--muted);">
     <a href="https://github.com/Gentleman-Programming/gentle-ai" style="color:var(--acc);text-decoration:none;">github.com/Gentleman-Programming/gentle-ai</a>
-    &nbsp;·&nbsp;
+    &nbsp;&middot;&nbsp;
     <a href="https://code.claude.com/docs" style="color:var(--acc);text-decoration:none;">code.claude.com/docs</a>
   </p>
   <br>
   <p style="color:var(--muted);font-size:.82em;">Guía actualizada · Abril 2026 · Claude Code nativo desde 2025</p>
 </footer>
 
+</div><!-- /lang-section ES -->
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- ENGLISH -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="lang-section" data-lang="en">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="eyebrow">// Updated Guide — Native Windows 11 · No WSL2</div>
+  <h1><span class="grad">Gentle-AI</span> + <span class="win-col">Claude Code</span></h1>
+  <p class="desc">100% native installation on Windows 11. No WSL2, no Linux, no complex configs. Just Git for Windows and two commands.</p>
+  <div class="badges">
+    <div class="badge b3">&#8862; Native Windows 11</div>
+    <div class="badge b1">Claude Code</div>
+    <div class="badge b2">gentle-ai v1.7+</div>
+    <div class="badge b4">No Node.js · No WSL2</div>
+  </div>
+</section>
+
+<!-- UPDATE BANNER -->
+<div class="update-bar">
+  <div class="dot"></div>
+  <span>Updated guide:</span>
+  <span style="color:var(--mut2)">Claude Code is native on Windows since 2025 · WSL2 is no longer required · gentle-ai has an official PowerShell installer</span>
+</div>
+
+<!-- COMMUNITY -->
+<div style="background: linear-gradient(90deg, rgba(108,140,255,.08), rgba(167,139,250,.08)); border-top: 1px solid var(--bord2); border-bottom: 1px solid var(--border); padding: 18px 40px; text-align: center;">
+  <p style="font-size: .82em; color: var(--mut2); font-family: 'JetBrains Mono', monospace; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">&#128588; Open-source</p>
+  <p style="font-size: .95em; color: var(--text); max-width: 700px; margin: 0 auto;">If this helped you, leave a &#11088; on the <a href="https://github.com/p5Patricio/guia-gentle-ai-claude-code-win11" style="color: var(--acc); text-decoration: underline;">GitHub repo</a>.</p>
+</div>
+
+<!-- WHAT IS -->
+<div class="two-cards">
+  <div class="card ca">
+    <div class="lbl">// Claude Code</div>
+    <h2>Anthropic Coding Agent</h2>
+    <p>Runs on PowerShell, CMD, or Git Bash. Reads your codebase, edits files, and understands the project through natural language. <strong>Native on Windows since 2025</strong> — only needs Git for Windows.</p>
+  </div>
+  <div class="card cb">
+    <div class="lbl">// Gentle-AI</div>
+    <h2>Gentleman Ecosystem Configurator</h2>
+    <p>Supercharges Claude Code: Engram memory, 9-phase SDD workflow, 21 skills, Context7, GGA, and mentor persona. <strong>Native Go binary</strong> with an official PowerShell installer.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ARCH DIAGRAM -->
+  <div style="padding:56px 0 0;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:.68em;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">// full stack on Windows 11</div>
+    <div class="arch">
+<span class="a1">Claude Code</span> (native on Windows · PowerShell / CMD / Git Bash)
+    │
+    ├── <span class="a2">Engram</span>     Persistent memory · SQLite + FTS5 · ~/.engram/engram.db
+    ├── <span class="a3">SDD</span>        Spec-Driven Dev · 9 phases · explore→propose→spec→apply→archive
+    ├── <span class="a4">Context7</span>   MCP server · real-time library docs
+    ├── <span class="a5">Skills</span>     21 patterns · React 19, Next.js 15, TypeScript, Tailwind 4
+    └── <span class="a1">GGA</span>        Guardian Angel · automatic code review on every commit
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 0 — PREREQUISITES ═══ -->
+  <div class="ph">
+    <div class="div"></div><br><br>
+    <div class="ph-hd">
+      <div class="ph-num wn">0</div>
+      <div>
+        <div class="ph-t">Prerequisites — just two things</div>
+        <div class="ph-s">Git for Windows + Go 1.24 · You don't need anything else</div>
+      </div>
+    </div>
+    <div class="alert awn">
+      <div>&#8862;</div>
+      <div class="ab">
+        <div class="t">Real requirements for Windows 11</div>
+        <p>Claude Code only needs Git for Windows. Gentle-AI is a self-contained binary; Go is only needed if you use <code>go install</code>.</p>
+      </div>
+    </div>
+    <h3>Step 1 — Git for Windows</h3>
+    <div class="step">
+      <div class="stag"><div class="dot dps"></div>PowerShell 7 — as Administrator</div>
+      <pre><span class="k">winget</span> install --id Git.Git -e --source winget
+<span class="k">git</span> --version</pre>
+    </div>
+    <h3>Step 2 — Go 1.24 (only for go install)</h3>
+    <div class="step">
+      <div class="stag"><div class="dot dps"></div>PowerShell 7 — optional</div>
+      <pre><span class="k">winget</span> install --id GoLang.Go -e
+<span class="k">go</span> version</pre>
+    </div>
+    <div class="alert ao">
+      <div>&#9989;</div>
+      <div class="ab">
+        <div class="t">The gentle-ai PowerShell installer does not require Go</div>
+        <p>It downloads the compiled binary directly from GitHub Releases.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 1 — CLAUDE CODE ═══ -->
+  <div class="ph">
+    <div class="div"></div><br><br>
+    <div class="ph-hd">
+      <div class="ph-num gn">1</div>
+      <div>
+        <div class="ph-t">Install Claude Code on Windows 11</div>
+        <div class="ph-s">Official Anthropic installer — native, no dependencies, auto-updating</div>
+      </div>
+    </div>
+    <h3>Official installation (recommended)</h3>
+    <div class="step">
+      <div class="stag"><div class="dot dps"></div>PowerShell 7 — NO Administrator needed</div>
+      <pre><span class="k">irm</span> https://claude.ai/install.ps1 | <span class="k">iex</span>
+<span class="k">claude</span> --version</pre>
+    </div>
+    <div class="alert ai">
+      <div>&#8505;&#65039;</div>
+      <div class="ab">
+        <div class="t">Always use the native installer</div>
+        <p>The npm method is deprecated. Alternative: <code>winget</code> (does not auto-update).</p>
+      </div>
+    </div>
+    <h3>Authentication with your Anthropic account</h3>
+    <div class="step">
+      <div class="stag"><div class="dot dps"></div>PowerShell / CMD / Git Bash</div>
+      <pre><span class="c"># Interactive login — opens browser via OAuth</span>
+<span class="k">claude</span>
+
+<span class="c"># Alternative: API key for headless/CI</span>
+<span class="k">$env</span>:ANTHROPIC_API_KEY = <span class="s">"sk-ant-YOUR-KEY-HERE"</span>
+<span class="k">claude</span></pre>
+    </div>
+    <div class="alert aw">
+      <div>&#128179;</div>
+      <div class="ab">
+        <div class="t">Claude Code requires a paid account</div>
+        <p>You need Claude Pro/Max/Teams or billing at console.anthropic.com.</p>
+      </div>
+    </div>
+    <p style="color:var(--mut2);margin:14px 0;">Claude Code works on PowerShell 7 (recommended), CMD, and Git Bash. Use <code>claude /help</code> to see all commands.</p>
+  </div>
+
+  <!-- ═══ PHASE 2 — GENTLE-AI ═══ -->
+  <div class="ph">
+    <div class="div"></div><br><br>
+    <div class="ph-hd">
+      <div class="ph-num pp">2</div>
+      <div>
+        <div class="ph-t">Install Gentle-AI on Windows 11</div>
+        <div class="ph-s">Native Go binary · Official PowerShell installer · No dependencies</div>
+      </div>
+    </div>
+    <h3>Option A — PowerShell Installer (recommended, no Go)</h3>
+    <div class="step">
+      <div class="stag"><div class="dot dps"></div>PowerShell 7</div>
+      <pre><span class="k">irm</span> https://raw.githubusercontent.com/Gentleman-Programming/gentle-ai/main/scripts/install.ps1 | <span class="k">iex</span></pre>
+    </div>
+    <h3>Option B — Go install (if you already have Go 1.24+)</h3>
+    <div class="step">
+      <div class="stag"><div class="dot dps"></div>PowerShell 7</div>
+      <pre><span class="k">go</span> install github.com/gentleman-programming/gentle-ai/cmd/gentle-ai@latest
+<span class="k">gentle-ai</span> --version</pre>
+    </div>
+    <div class="alert ao">
+      <div>&#9989;</div>
+      <div class="ab">
+        <div class="t">gentle-ai is a static binary — zero runtime dependencies</div>
+        <p>Just the <code>gentle-ai.exe</code> executable. No Node.js, Python, or Docker.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 3 — CONFIGURE ECOSYSTEM ═══ -->
+  <div class="ph">
+    <div class="div"></div><br><br>
+    <div class="ph-hd">
+      <div class="ph-num or">3</div>
+      <div>
+        <div class="ph-t">Configure the full ecosystem</div>
+        <div class="ph-s">Inject Engram + SDD + Skills + Context7 + GGA + Persona into Claude Code</div>
+      </div>
+    </div>
+    <h3>Option A — Interactive TUI (recommended)</h3>
+    <div class="step">
+      <div class="stag"><div class="dot dps"></div>PowerShell 7</div>
+      <pre><span class="k">gentle-ai</span></pre>
+    </div>
+    <h3>Option B — Direct CLI (everything in one command)</h3>
+    <div class="step">
+      <div class="stag"><div class="dot dps"></div>PowerShell 7</div>
+      <pre><span class="k">gentle-ai</span> install --agent claude-code --preset full-gentleman</pre>
+    </div>
+    <h3>Component installation</h3>
+    <div class="step">
+      <div class="stag"><div class="dot dps"></div>PowerShell 7</div>
+      <pre><span class="k">gentle-ai</span> install --agent claude-code --component engram,sdd,skills,context7,permissions --persona gentleman</pre>
+    </div>
+    <h3>Component reference</h3>
+    <div class="flow">
+      <div class="fc"><div class="fc-n">01</div><div class="fc-t">engram</div><div class="fc-d">Persistent memory with SQLite.</div></div>
+      <div class="fc"><div class="fc-n">02</div><div class="fc-t">sdd</div><div class="fc-d">Spec-Driven Dev · 9 phases.</div></div>
+      <div class="fc"><div class="fc-n">03</div><div class="fc-t">skills</div><div class="fc-d">21 modern code patterns.</div></div>
+      <div class="fc"><div class="fc-n">04</div><div class="fc-t">context7</div><div class="fc-d">MCP server · real-time docs.</div></div>
+      <div class="fc"><div class="fc-n">05</div><div class="fc-t">gga</div><div class="fc-d">Automatic code review.</div></div>
+      <div class="fc"><div class="fc-n">06</div><div class="fc-t">persona</div><div class="fc-d">Mentor that teaches and challenges.</div></div>
+    </div>
+    <p style="color:var(--mut2);margin:14px 0;">Run <code>gentle-ai --help</code> for all available flags: <code>--agent</code>, <code>--preset</code>, <code>--component</code>, <code>--skill</code>, <code>--persona</code>, <code>--dry-run</code>.</p>
+  </div>
+
+  <!-- ═══ PHASE 4 — NEW / EXISTING PROJECT ═══ -->
+  <div class="ph">
+    <div class="div"></div><br><br>
+    <div class="ph-hd">
+      <div class="ph-num st">4</div>
+      <div>
+        <div class="ph-t">Use in a project</div>
+        <div class="ph-s">New or existing · Where to store projects · How to start</div>
+      </div>
+    </div>
+    <div class="alert aw">
+      <div>&#128193;</div>
+      <div class="ab">
+        <div class="t">Where to store projects?</div>
+        <p>Use <code>C:\dev\</code> or <code>C:\Users\YourUser\projects\</code>.</p>
+      </div>
+    </div>
+    <h3>New project</h3>
+    <div class="ub">
+      <pre><span class="k">mkdir</span> C:\dev\my-app
+<span class="k">cd</span> C:\dev\my-app
+<span class="k">git</span> init
+<span class="k">git</span> commit --allow-empty -m <span class="s">"chore: init"</span>
+<span class="k">gentle-ai</span> install --agent claude-code --preset full-gentleman
+<span class="k">engram</span> init
+<span class="k">claude</span></pre>
+    </div>
+    <h3>Existing project</h3>
+    <div class="ub">
+      <pre><span class="k">cd</span> C:\dev\my-existing-project
+<span class="k">git</span> status
+<span class="k">gentle-ai</span> install --agent claude-code --preset full-gentleman
+<span class="k">engram</span> init
+<span class="k">claude</span></pre>
+    </div>
+    <div class="alert ao">
+      <div>&#128737;&#65039;</div>
+      <div class="ab">
+        <div class="t">gentle-ai does not destroy your existing configuration</div>
+        <p>Injects blocks without deleting your config. Backup at <code>~\.gentle-ai\backups\</code>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 5 — DAILY WORKFLOW ═══ -->
+  <div class="ph">
+    <div class="div"></div><br><br>
+    <div class="ph-hd">
+      <div class="ph-num" style="background:linear-gradient(135deg,#34d399,#0891b2);box-shadow:0 0 30px rgba(45,212,191,.25)">5</div>
+      <div>
+        <div class="ph-t">Daily workflow on Windows 11</div>
+        <div class="ph-s">How to start up and use the stack every day</div>
+      </div>
+    </div>
+    <h3>Daily startup</h3>
+    <div class="step">
+      <div class="stag"><div class="dot dps"></div>PowerShell 7 — Windows Terminal recommended</div>
+      <pre><span class="k">cd</span> C:\dev\my-app
+<span class="k">engram</span> list
+<span class="k">claude</span></pre>
+    </div>
+    <h3>Useful Engram commands</h3>
+    <div class="step">
+      <div class="stag"><div class="dot dgn"></div>PowerShell 7</div>
+      <pre><span class="k">engram</span> list
+<span class="k">engram</span> search <span class="s">"architecture"</span></pre>
+    </div>
+    <h3>Commands inside Claude Code chat</h3>
+    <div class="step">
+      <div class="stag"><div class="dot dac"></div>Inside Claude Code chat</div>
+      <pre><span class="s">"Let's use SDD to implement [feature]. Start with explore."</span></pre>
+    </div>
+    <h3>Update both tools</h3>
+    <div class="step">
+      <div class="stag"><div class="dot dps"></div>PowerShell 7</div>
+      <pre><span class="k">claude</span> update
+<span class="k">irm</span> https://raw.githubusercontent.com/Gentleman-Programming/gentle-ai/main/scripts/install.ps1 | <span class="k">iex</span>
+<span class="k">gentle-ai</span> install --agent claude-code --preset full-gentleman</pre>
+    </div>
+  </div>
+
+  <!-- ═══ NATIVE WINDOWS VS WSL2 ═══ -->
+  <div class="ph">
+    <div class="div"></div><br><br>
+    <div class="ph-hd">
+      <div class="ph-num wn">&#8776;</div>
+      <div>
+        <div class="ph-t">Native Windows vs WSL2</div>
+        <div class="ph-s">The only real difference that matters</div>
+      </div>
+    </div>
+    <div class="cmp">
+      <div class="cmp-h wn">&#8862; Native Windows</div>
+      <div class="cmp-h ws">&#128039; WSL2 + Ubuntu</div>
+      <div class="cmp-b"><p style="margin-bottom:10px;font-size:.9em;color:var(--mut2);">&#9989; Simple setup · 2 steps<br>&#9989; Full ecosystem works<br>&#10060; No bash sandbox<br>&rarr; <strong style="color:var(--text)">Recommended</strong></p></div>
+      <div class="cmp-b"><p style="margin-bottom:10px;font-size:.9em;color:var(--mut2);">&#9888; More complex setup<br>&#9989; Full ecosystem works<br>&#9989; NemoClaw + bash sandbox<br>&rarr; <strong style="color:var(--text)">Only if you use NemoClaw/OpenClaw</strong></p></div>
+    </div>
+    <div class="alert ai">
+      <div>&#128161;</div>
+      <div class="ab">
+        <div class="t">Conclusion</div>
+        <p>Native Windows is enough and much simpler. Use WSL2 only if you need the bash sandbox or NemoClaw/OpenClaw.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ TROUBLESHOOTING ═══ -->
+  <div class="ph">
+    <div class="div"></div><br><br>
+    <div class="ph-hd">
+      <div class="ph-num" style="background:linear-gradient(135deg,#f87171,#dc2626);box-shadow:0 0 30px rgba(248,113,113,.2)">&#9888;</div>
+      <div>
+        <div class="ph-t">Troubleshooting on Windows 11</div>
+        <div class="ph-s">Common problems and their solutions</div>
+      </div>
+    </div>
+    <table>
+      <tr><th>Problem</th><th>Cause</th><th>Solution</th></tr>
+      <tr><td><strong><code>claude</code> not recognized</strong></td><td><code>~\.local\bin</code> is not in PATH</td><td>Close and reopen PowerShell. If it persists, add <code>$env:USERPROFILE\.local\bin</code> to the user PATH.</td></tr>
+      <tr><td><strong><code>gentle-ai</code> not recognized</strong></td><td>Binary is not in PATH</td><td>Add <code>C:\Users\YourUser\go\bin</code> to PATH (go install) or close and reopen PowerShell (installer).</td></tr>
+      <tr><td><strong>Engram doesn't remember the project</strong></td><td>No git init</td><td><code>git init && git add . && git commit -m "init" && engram init</code></td></tr>
+      <tr><td><strong>PowerShell script execution error</strong></td><td>Restrictive policy</td><td><code>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></td></tr>
+      <tr><td><strong>Claude Code loses context in long sessions</strong></td><td>Context window full</td><td><code>/clear</code> and ask it to check Engram.</td></tr>
+    </table>
+  </div>
+
+  <!-- BEFORE/AFTER -->
+  <div class="ph">
+    <div class="div"></div><br><br>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:.68em;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:22px;">// before vs after</div>
+    <table>
+      <tr><th>Aspect</th><th>Claude Code alone</th><th>+ Gentle-AI</th></tr>
+      <tr><td><strong>Memory between sessions</strong></td><td>None</td><td>Engram persists everything</td></tr>
+      <tr><td><strong>Development process</strong></td><td>Ad-hoc</td><td>Structured SDD (9 phases)</td></tr>
+      <tr><td><strong>Library docs</strong></td><td>Model cutoff date</td><td>Real-time with Context7</td></tr>
+      <tr><td><strong>Code review</strong></td><td>Only if you ask</td><td>Automatic on every commit</td></tr>
+    </table>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <div class="ft-big">Gentle-AI &times; Claude Code</div>
+  <p>Native Windows 11 · No WSL2 · No Node.js · No dependencies</p>
+  <br>
+  <p style="color:var(--muted);">
+    <a href="https://github.com/Gentleman-Programming/gentle-ai" style="color:var(--acc);text-decoration:none;">github.com/Gentleman-Programming/gentle-ai</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://code.claude.com/docs" style="color:var(--acc);text-decoration:none;">code.claude.com/docs</a>
+  </p>
+  <br>
+  <p style="color:var(--muted);font-size:.82em;">Updated guide · April 2026 · Claude Code native since 2025</p>
+</footer>
+
+</div><!-- /lang-section EN -->
+
+<script>
+(function() {
+  const html = document.documentElement;
+  const btnEs = document.getElementById('btn-es');
+  const btnEn = document.getElementById('btn-en');
+  const titleEl = document.querySelector('title');
+
+  function setLang(lang) {
+    html.setAttribute('lang', lang);
+    localStorage.setItem('guia-lang', lang);
+    if (lang === 'es') {
+      btnEs.classList.add('active');
+      btnEn.classList.remove('active');
+    } else {
+      btnEn.classList.add('active');
+      btnEs.classList.remove('active');
+    }
+    // Update page title
+    if (titleEl) {
+      const newTitle = titleEl.getAttribute('data-title-' + lang);
+      if (newTitle) titleEl.textContent = newTitle;
+    }
+  }
+
+  const saved = localStorage.getItem('guia-lang');
+  if (saved === 'en') setLang('en');
+  else setLang('es');
+
+  window.setLang = setLang;
+})();
+</script>
 </body>
 </html>
